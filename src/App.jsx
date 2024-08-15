@@ -1,5 +1,5 @@
-import Button from "./components/Elements/Button/Index";
-import InputForm from "./components/Elements/Input/InputForm";
+// import LoginPage from "./pages/login";
+import RegisterPage from "./pages/register";
 
 // class Button extends React.Component {
 //   render() {
@@ -29,28 +29,9 @@ import InputForm from "./components/Elements/Input/InputForm";
 
 function App() {
   return (
-    <div className="flex  justify-center min-h-screen items-center ">
-      <div className="w-full max-w-xs">
-        <h1 className=" text-3xl font-bold mb-2 text-blue-600 text-center ">
-          Login
-        </h1>
-        <p className="mb-6 text-slate-700">Login to access your account</p>
-        <div className="mb-6">
-          <InputForm
-            label="Email"
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-          />
-          <InputForm
-            label="Password"
-            type="password"
-            name="email"
-            placeholder="Enter your password"
-          />
-        </div>
-        <Button classname={"bg-blue-600 w-full"}>Login</Button>
-      </div>
+    <div className="flex justify-center min-h-screen items-center ">
+      {/* <LoginPage /> */}
+      <RegisterPage />
     </div>
   );
 }

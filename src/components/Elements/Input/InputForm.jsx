@@ -4,7 +4,7 @@ import Input from "./Input";
 
 function InputForm(props) {
   const { label, type, name, placeholder } = props;
-  console.log(name);
+
   return (
     <div className="mb-6">
       <Label htmlFor={name}>{label}</Label>
