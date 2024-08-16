@@ -21,6 +21,7 @@ const AuthLayouts = (props) => {
           >
             {type === "login" ? `Sign Up` : "Log In"}
           </Link>
+          {type === "logout"}
         </p>
       </div>
     </div>
@@ -30,6 +31,7 @@ const AuthLayouts = (props) => {
 AuthLayouts.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default AuthLayouts;
