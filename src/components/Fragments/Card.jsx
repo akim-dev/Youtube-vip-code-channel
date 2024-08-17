@@ -5,18 +5,19 @@ const Card = (props) => {
   const { children } = props;
 
   return (
-    <div className="w-full max-w-xs bg-gray-800 border border-gray-100 rounded-lg shadow">
+    <div className="w-full max-w-xs bg-gray-800 border border-gray-100 rounded-lg shadow mx-2 flex flex-col justify-between">
       {children}
     </div>
   );
 };
 
-const Header = () => {
+const Header = (props) => {
+  const { image } = props;
   return (
     <div className="px-5 pt-5">
       <a href="">
         <img
-          src="/images/shoes_1.jpg"
+          src={image}
           alt=""
           className="w-full h-48 object-cover rounded-t-lg"
         />
@@ -29,7 +30,10 @@ const Body = (props) => {
   const { children, title } = props;
   return (
     <div className="px-5 pb-5">
-      <a href="" className="text-xl font-normal tracking-tight text-white ">
+      <a
+        href=""
+        className="text-xl font-normal tracking-tight text-white h-full "
+      >
         <h5 className="text-2xl font-bold">{title}</h5>
         <p className="text-sm text-white">{children}</p>
       </a>
@@ -37,11 +41,12 @@ const Body = (props) => {
   );
 };
 
-const Footer = () => {
+const Footer = (props) => {
+  const { price } = props;
   return (
     <div className="flex items-center justify-between px-5 pb-5">
-      <span className="text-xl font-bold text-white">Rp 100.000</span>
-      <Button classname="bg-blue-600">Add to cart</Button>
+      <span className="text-xl font-bold text-white">Rp {price}</span>
+      <Button classname="bg-blue-600 hover:first-letter:">Add to cart</Button>
     </div>
   );
 };
