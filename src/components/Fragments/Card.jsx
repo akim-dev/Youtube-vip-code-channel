@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Button from "../Elements/Button/Index";
 import PropTypes from "prop-types";
 
@@ -46,7 +47,14 @@ const Footer = (props) => {
   return (
     <div className="flex items-center justify-between px-5 pb-5">
       <span className="text-xl font-bold text-white">Rp {price}</span>
-      <Button classname="bg-blue-600 hover:first-letter:">Add to cart</Button>
+      <Button
+        classname="bg-blue-600 hover:first-letter:"
+        onClick={() => {
+          console.log("Add to cart");
+        }}
+      >
+        Add to cart
+      </Button>
     </div>
   );
 };
@@ -55,14 +63,14 @@ Card.Header = Header;
 Card.Body = Body;
 Card.Footer = Footer;
 
-Body.PropTypes = {
+Body.propTypes = {
   children: PropTypes.string,
 
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
-Card.PropTypes = {
-  children: PropTypes.node.string,
+Card.propTypes = {
+  children: PropTypes.node,
 };
 
 export default Card;
