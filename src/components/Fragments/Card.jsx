@@ -43,15 +43,15 @@ const Body = (props) => {
 };
 
 const Footer = (props) => {
-  const { price } = props;
+  const { price, addToCart, id, name } = props;
   return (
     <div className="flex items-center justify-between px-5 pb-5">
-      <span className="text-xl font-bold text-white">Rp {price}</span>
+      <span className="text-xl font-bold text-white">
+        {price.toLocaleString("us-en", { style: "currency", currency: "USD" })}
+      </span>
       <Button
         classname="bg-blue-600 hover:first-letter:"
-        onClick={() => {
-          console.log("Add to cart");
-        }}
+        onClick={() => addToCart(id, name)}
       >
         Add to cart
       </Button>
@@ -64,7 +64,7 @@ Card.Body = Body;
 Card.Footer = Footer;
 
 Body.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.array,
 
   title: PropTypes.string,
 };
