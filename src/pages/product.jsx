@@ -1,6 +1,7 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Card from "../components/Fragments/Card";
 import Button from "../components/Elements/Button/Index";
+import Counter from "../components/Fragments/Counter";
 
 const products = [
   {
@@ -37,18 +38,33 @@ const email = localStorage.getItem("email");
 
 const ProductPage = () => {
   const [cart, setCart] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const handleClick2 = () => {
+  // put to local storage
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")) || []);
+  }, []);
+
+  // total price
+  useEffect(() => {
+    if (cart.length > 0) {
+      const sum = cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+      setTotalPrice(sum);
+      localStorage.setItem("cart", JSON.stringify(cart));
+    }
+  }, [cart]);
+
+  const handleLogout = () => {
     console.log("You clicked me2!");
     localStorage.removeItem("email");
     localStorage.removeItem("password");
     window.location.href = "/login";
   };
 
-  const handleAddToCart = (id, name) => {
-    // cart.push({ id: id, quantity: 1, name: name });
-    // setCart([...cart, { id: id, quantity: 1, name: name }]);
-
+  const handleAddToCart = (id, name, price) => {
     if (cart.find((item) => item.id === id)) {
       setCart(
         cart.map((item) =>
@@ -56,7 +72,7 @@ const ProductPage = () => {
         )
       );
     } else {
-      setCart([...cart, { id: id, quantity: 1, name: name }]);
+      setCart([...cart, { id: id, quantity: 1, name: name, price: price }]);
     }
   };
 
@@ -65,7 +81,7 @@ const ProductPage = () => {
       <div className=" flex justify-end bg-blue-400 text-white items-center px-20 py-10 h-20 ">
         <h1 className="text-md font-bold block">Welcome {email}</h1>
         <Button
-          onClick={handleClick2}
+          onClick={handleLogout}
           className="ml-5 bg-slate-600 p-2 rounded "
         >
           Log Out
@@ -94,15 +110,7 @@ const ProductPage = () => {
         </div>
         <div className=" w-1/4 ">
           <h1 className="text-3xl font-bold text-blue-600 ml-5 mb-2">Cart</h1>
-          {/* <h2>
-            Total Harga :{" "}
-            {console.log(
-              cart.reduce(
-                (total, item) => total + item.quantity * item.price,
-                0
-              )
-            )}
-          </h2> */}
+          {/* <h4>Total = ${totalHarga.toFixed(2)}</h4> */}
 
           {/* <div>{cart}</div> */}
 
@@ -116,10 +124,6 @@ const ProductPage = () => {
               </tr>
             </thead>
             <tbody>
-              {/* {cart.map((item) => {
-                const prod = products.find((item) => item.id === item.id);
-                return <tr key={item.id}>{console.log(prod)}</tr>;
-              })} */}
               {cart.map((item) => {
                 const data = products.find((i) => i.id === item.id);
                 return (
@@ -128,12 +132,23 @@ const ProductPage = () => {
                     <td>{data.price}</td>
                     <td>{item.quantity}</td>
                     <td>{data.price * item.quantity}</td>
-                    {/* <td>
-                      {cart.reduce((total, item) => total + item.quantity, 0)}
-                    </td> */}
                   </tr>
                 );
               })}
+
+              <tr>
+                <td colSpan={3}>
+                  <b>Total Price</b>
+                </td>
+                <td>
+                  <b>
+                    {totalPrice.toLocaleString("id-ID", {
+                      style: "currency",
+                      currency: "IDR",
+                    })}
+                  </b>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

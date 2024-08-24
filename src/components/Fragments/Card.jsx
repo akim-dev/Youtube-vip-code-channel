@@ -51,7 +51,7 @@ const Footer = (props) => {
       </span>
       <Button
         classname="bg-blue-600 hover:first-letter:"
-        onClick={() => addToCart(id, name)}
+        onClick={() => addToCart(id, name, price)}
       >
         Add to cart
       </Button>
